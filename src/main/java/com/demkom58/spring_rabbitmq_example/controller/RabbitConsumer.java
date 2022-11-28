@@ -16,12 +16,13 @@ import static org.springframework.amqp.support.AmqpHeaders.DELIVERY_TAG;
 @AllArgsConstructor
 @Slf4j
 public class RabbitConsumer {
-    @RabbitListener(queues = "#{rabbitProperties.queue}",  id = "testId")
+
+    @RabbitListener(queues = "#{rabbitProperties.queue}", id = "testId")
     public void process(Message message, Channel channel, @Header(DELIVERY_TAG) long tag) {
         String messageBody = new String(message.getBody(), StandardCharsets.UTF_8);
         log.info("Got new message from queue: {}", messageBody);
         try {
-            if(messageBody.equals("Hello from Lugovskyi")) {
+            if (messageBody.equals("Hello from Lugovskyi")) {
                 channel.basicAck(tag, false);
                 log.info("greeting from Lugovskyi acked");
             } else {
@@ -29,7 +30,8 @@ public class RabbitConsumer {
                 log.info("not valid message nacked");
             }
         } catch (Exception e) {
-            log.error("Catching {} during processing RabbitMQ message. Will send message to a dead queue", e.getClass().getSimpleName(), e);
+            log.error("Catching {} during processing RabbitMQ message. Will send message to a dead queue",
+                    e.getClass().getSimpleName(), e);
         }
     }
 }

@@ -33,7 +33,6 @@ public class RabbitConfig {
         return new CachingConnectionFactory(connectionFactory);
     }
 
-
     @Bean
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory()
             throws NoSuchAlgorithmException, KeyManagementException {
