@@ -29,7 +29,6 @@ public class RabbitConfig {
         connectionFactory.setUsername(rabbitProperties.getUsername());
         connectionFactory.setPassword(rabbitProperties.getPassword());
         connectionFactory.setPort(parseInt(rabbitProperties.getPort()));
-        connectionFactory.useSslProtocol(rabbitProperties.getSslProtocol());
         return new CachingConnectionFactory(connectionFactory);
     }
 
